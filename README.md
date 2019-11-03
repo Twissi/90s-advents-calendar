@@ -5,7 +5,7 @@
 Find a link behind each door.
 This advents calendar features websites about Brutalism web design.
 
-Try the advents calendar: https://twissi.github.io/90s-advents-calendar/src/dist/index.html
+Try the advents calendar: https://twissi.github.io/90s-advents-calendar/
 
 ## Screenshots
 
@@ -54,8 +54,9 @@ Run the following commands in the `/src` folder to generate the static site.
 $ yarn generate
 ```
 
-## Deploy to gh-pages
+## Generate & Deploy to gh-pages
 
 ```bash
-generate:gh-pages
+yarn generate:gh-pages
+yarn deploy
 ```
