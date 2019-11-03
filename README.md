@@ -2,9 +2,12 @@
 
 > Customizable 90s advents calendar
 
+Find a link behind each door.
+This advents calendar features websites about Brutalism web design.
+
 ## Screenshots
 
-This is how the calendar looks:
+This is an example on how the calendar looks.
 
 Before december:
 ![Screenshot of calendar before dec](https://github.com/Twissi/90s-advents-calendar/blob/master/screenshots/Screenshot%202019-11-03%20at%2022.15.22.png?raw=true)
@@ -24,11 +27,11 @@ $ yarn install
 $ yarn dev
 ```
 
-## Customizable content
+## Customize content
 
 Update the file `/shared/content.js` with you own content.
 
-## Overwrite todays date for testing
+## Test by overwriting todays date
 
 Update env var `overwriteDate` in `nuxt.config.js`:
 
