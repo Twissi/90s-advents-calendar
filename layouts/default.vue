@@ -6,7 +6,8 @@
 
 <style>
 html {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Minecraft, Arial, Helvetica, sans-serif;
+  color: #fff;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -14,7 +15,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  cursor: url("~assets/images/christmas-star-filled.png"), auto;
 }
 
 *,

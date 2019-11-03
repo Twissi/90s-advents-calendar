@@ -4,7 +4,8 @@
     @click="clickDoor"
   >
     <a v-if="open" :href="url" target="_blank">
-      <img :src="imageUrl" />
+      <img v-if="imageUrl" :src="imageUrl" />
+      <div v-if="!imageUrl">LINK</div>
     </a>
 
     <span class="door-number">{{id}}</span>
@@ -18,7 +19,8 @@ export default {
     return {
       open: false,
       shake: false,
-      bounce: false
+      bounce: false,
+      calendar: null
     };
   },
   props: {
@@ -35,17 +37,24 @@ export default {
       return doorClasses;
     },
     isToday: function() {
-      return true;
-      const date = new Date(Date.now());
-      return date.getDate() === this.id;
+      const day = this.calendar.todaysDay();
+      return day === this.id;
     },
     isPast: function() {
-      const date = new Date(Date.now());
-      return this.id < date.getDate();
+      if (!this.calendar.isDecember()) {
+        return false;
+      }
+
+      const day = this.calendar.todaysDay();
+      return this.id < day;
     }
   },
   methods: {
     clickDoor: function() {
+      if (!this.calendar.isDecember()) {
+        return this.animate("shake");
+      }
+
       if (this.isToday && !this.open) {
         this.animate("bounce");
         this.open = true;
@@ -61,6 +70,7 @@ export default {
     }
   },
   created() {
+    this.calendar = this.$calendar();
     if (this.isPast) {
       this.open = true;
     }
@@ -71,15 +81,13 @@ export default {
 <style lang="postcss" scoped>
 .door {
   position: relative;
-  border: 5px solid black;
-  color: black;
+  background-color: #0432ff;
+  border: 5px solid #fff;
   font-size: 70px;
+  cursor: url("~assets/images/christmas-star-filled.png"), auto;
 }
 .door:nth-child(2n) {
   border: 5px dotted black;
-}
-.door:nth-child(3n) {
-  margin-left: 50px;
 }
 .door .door-number {
   position: absolute;
@@ -92,13 +100,18 @@ export default {
 }
 .door a {
   display: block;
-  height: 100%;
+  height: 80px;
 }
 .door img {
   width: 100%;
-  height: 100%;
+  height: 80px;
   object-fit: cover;
   object-position: 50% 50%;
+}
+.door div {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 80px;
 }
 .door-1 {
   grid-column: 1;
@@ -131,8 +144,8 @@ export default {
   grid-row: 3;
 }
 .door-8 {
-  grid-column: 2;
-  grid-row: 6;
+  grid-column: 7;
+  grid-row: 5;
 }
 .door-9 {
   grid-column: 4;
@@ -142,6 +155,7 @@ export default {
 .door-10 {
   grid-column: 3;
   grid-row: 1;
+  transform: skewX(20deg);
 }
 .door-11 {
   grid-column: 2;
@@ -176,12 +190,12 @@ export default {
   grid-row: 3;
 }
 .door-17 {
-  grid-column: 6;
-  grid-row: 6;
+  grid-column: 7;
+  grid-row: 3;
 }
 .door-18 {
-  grid-column: 5;
-  grid-row: 6;
+  grid-column: 7;
+  grid-row: 1;
 }
 .door-19 {
   grid-column: 6;
@@ -201,17 +215,17 @@ export default {
   grid-row: 1;
 }
 .door-23 {
-  grid-column: 3;
-  grid-row: 6;
+  grid-column: 2;
+  grid-row: 5;
 }
 .door-24 {
   grid-column: 5;
   grid-row: 2;
-  transform: scale(1.2);
+  transform: skewX(20deg);
 }
 .door.open {
+  cursor: default;
   background-color: #ee23ee;
   font-size: 16px;
-  transform: none;
 }
 </style>

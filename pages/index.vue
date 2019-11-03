@@ -1,16 +1,16 @@
 <template>
   <div class="calendar">
-    <p>{{poem}}</p>
     <div class="doors">
       <template v-for="door in doors">
         <door v-bind="door" :key="door.id" />
       </template>
     </div>
+    <div class="title">{{title}}</div>
   </div>
 </template>
 
 <script>
-import { poem, doors } from "~/content/content";
+import { poem, doors } from "~/shared/content";
 import doorComponent from "~/components/door";
 
 export default {
@@ -18,24 +18,60 @@ export default {
     door: doorComponent
   },
   name: "Calendar",
-  data: () => {
-    return { poem: poem, doors: doors };
+  data: function() {
+    return {
+      poem: poem,
+      doors: doors,
+      calendar: null
+    };
+  },
+  computed: {
+    title: function() {
+      const daysBefore = this.calendar.daysBeforeChristmas();
+      if (!daysBefore) {
+        return `Not yet ... come back in december`;
+      }
+      if (daysBefore === 1) {
+        return `${daysBefore} day before christmas`;
+      }
+      return `${daysBefore} days before christmas`;
+    }
+  },
+  created: function() {
+    this.calendar = this.$calendar();
   }
 };
 </script>
 
 <style lang="postcss" scoped>
+.calendar {
+  position: relative;
+  width: 1241px;
+  height: 100vh;
+  background-image: url("~assets/images/ms-paint.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  margin: 0 auto;
+}
+
 .doors {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(100vw - 50px);
-  height: calc(100vh - 50px);
+  top: calc(50% - 370px);
+  left: 160px;
+  width: 1030px;
+  height: 630px;
   padding: 25px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   grid-gap: 30px;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.title {
+  position: absolute;
+  top: calc(50% - 465px);
+  left: 60px;
+  font-size: 30px;
 }
 
 p {
