@@ -84,6 +84,7 @@ export default {
   background-color: #0432ff;
   border: 5px solid #fff;
   font-size: 70px;
+  display: block;
   cursor: url("~assets/images/christmas-star-filled.png"), auto;
 }
 .door:nth-child(2n) {
