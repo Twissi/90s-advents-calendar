@@ -1,0 +1,17 @@
+{
+  "name": "advents-calendar",
+  "version": "1.0.0",
+  "description": "Customizable digital advents calendar",
+  "author": "Kristin Fritsch",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {}
+}
