@@ -1,19 +1,17 @@
-# advents-calendar
+# 90s-advents-calendar
 
-> Customizable digital advents calendar
+> Customizable 90s advents calendar
 
-## Build Setup
+## Run locally
 
-``` bash
+Run the following commands in the `/src` folder.
+
+```bash
 # install dependencies
 $ yarn install
 
 # serve with hot reload at localhost:3000
 $ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
 
 # generate static project
 $ yarn generate
