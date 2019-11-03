@@ -5,6 +5,8 @@
 Find a link behind each door.
 This advents calendar features websites about Brutalism web design.
 
+Try the advents calendar: https://twissi.github.io/90s-advents-calendar/src/dist/
+
 ## Screenshots
 
 This is an example on how the calendar looks.
