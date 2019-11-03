@@ -8,6 +8,7 @@ const routerBase =
     : {};
 
 export default {
+  ...routerBase,
   mode: "spa",
   /*
    ** Headers of the page
