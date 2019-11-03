@@ -43,11 +43,17 @@ env: {
 }
 ```
 
-## Deploy
+## Generate
 
 Run the following commands in the `/src` folder to generate the static site.
 
 ```bash
 # generate static project
 $ yarn generate
+```
+
+## Deploy to gh-pages
+
+```bash
+generate:gh-pages
 ```

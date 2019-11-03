@@ -1,3 +1,12 @@
+const routerBase =
+  process.env.DEPLOY_ENV === "GH_PAGES"
+    ? {
+        router: {
+          base: "/<repository-name>/"
+        }
+      }
+    : {};
+
 export default {
   mode: "spa",
   /*
@@ -50,5 +59,6 @@ export default {
   },
   env: {
     overwriteDate: ""
-  }
+  },
+  routerBase: routerBase
 };
