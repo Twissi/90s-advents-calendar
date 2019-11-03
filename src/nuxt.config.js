@@ -2,7 +2,7 @@ const routerBase =
   process.env.DEPLOY_ENV === "GH_PAGES"
     ? {
         router: {
-          base: "/90s-advents-calendar/"
+          base: "/src/dist/90s-advents-calendar/"
         }
       }
     : {};
