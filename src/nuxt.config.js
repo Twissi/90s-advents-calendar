@@ -60,6 +60,5 @@ export default {
   },
   env: {
     overwriteDate: ""
-  },
-  routerBase: routerBase
+  }
 };
