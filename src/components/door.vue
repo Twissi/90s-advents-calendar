@@ -85,7 +85,7 @@ export default {
   border: 5px solid #fff;
   font-size: 70px;
   display: block;
-  cursor: url("~assets/images/christmas-star-filled.png"), auto;
+  cursor: url("~static/images/christmas-star-filled.png"), auto;
 }
 .door:nth-child(2n) {
   border: 5px dotted black;

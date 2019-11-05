@@ -48,7 +48,7 @@ export default {
   position: relative;
   width: 1241px;
   height: 100vh;
-  background-image: url("~assets/images/ms-paint.png");
+  background-image: url("~static/images/ms-paint.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   margin: 0 auto;
