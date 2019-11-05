@@ -6,16 +6,19 @@
       </template>
     </div>
     <div class="title">{{title}}</div>
+    <santa />
   </div>
 </template>
 
 <script>
 import { poem, doors } from "~/shared/content";
-import doorComponent from "~/components/door";
+import DoorComponent from "~/components/door";
+import Santa from "~/components/santa";
 
 export default {
   components: {
-    door: doorComponent
+    door: DoorComponent,
+    santa: Santa
   },
   name: "Calendar",
   data: function() {
