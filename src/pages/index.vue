@@ -2,7 +2,7 @@
   <div class="calendar">
     <div class="doors">
       <template v-for="door in doors">
-        <door v-bind="door" :key="door.id" />
+        <door :key="door.id" :content-id="door.id" />
       </template>
     </div>
     <div class="title">{{title}}</div>
@@ -46,24 +46,24 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
 .calendar {
   position: relative;
-  width: 1241px;
+  width: auto;
   height: 100vh;
-  background-image: url("~static/images/ms-paint.png");
+  /* background-image: url("~static/images/ms-paint.png"); */
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  margin: 0 auto;
+  background-size: contain;
 }
 
 .doors {
   position: absolute;
-  top: calc(50% - 370px);
-  left: 160px;
-  width: 1030px;
-  height: 630px;
-  padding: 25px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 100px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 30px;
@@ -72,9 +72,10 @@ export default {
 
 .title {
   position: absolute;
-  top: calc(50% - 465px);
-  left: 60px;
+  top: 30px;
+  left: 150px;
   font-size: 30px;
+  color: snow;
 }
 
 p {
@@ -86,5 +87,11 @@ p {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .calendar {
+    /* transform: scale(0.8); */
+  }
 }
 </style>

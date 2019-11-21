@@ -3,18 +3,19 @@
     :class="[style, {'animated shake': shake}, {'animated bounceIn': bounce}]"
     @click="clickDoor"
   >
-    <a v-if="open" :href="url" target="_blank">
-      <img v-if="imageUrl" :src="imageUrl" />
-      <div v-if="!imageUrl">LINK</div>
-    </a>
+    <doorContent v-if="open" v-bind="door" />
 
-    <span class="door-number">{{id}}</span>
+    <span class="door-number">{{contentId}}</span>
   </div>
 </template>
 
 <script>
+import { doors } from "~/shared/content";
+import doorContent from "~/components/doorContent";
+
 export default {
   name: "Door",
+  components: { doorContent },
   data: () => {
     return {
       open: false,
@@ -24,13 +25,20 @@ export default {
     };
   },
   props: {
-    imageUrl: String,
-    url: String,
-    id: Number
+    contentId: Number
   },
   computed: {
+    door: function() {
+      const contentId = this.contentId;
+      if (this.isToday || this.isPast) {
+        return doors.find(door => {
+          return door.id === contentId;
+        });
+      }
+      return null;
+    },
     style: function() {
-      const doorClasses = `door door-${String(this.id)}`;
+      const doorClasses = `door door-${String(this.contentId)}`;
       if (this.open) {
         return doorClasses + ` open`;
       }
@@ -38,7 +46,7 @@ export default {
     },
     isToday: function() {
       const day = this.calendar.todaysDay();
-      return day === this.id;
+      return day === this.contentId;
     },
     isPast: function() {
       if (!this.calendar.isDecember()) {
@@ -46,7 +54,7 @@ export default {
       }
 
       const day = this.calendar.todaysDay();
-      return this.id < day;
+      return this.contentId < day;
     }
   },
   methods: {
@@ -56,7 +64,6 @@ export default {
       }
 
       if (this.isToday && !this.open) {
-        this.animate("bounce");
         this.open = true;
       } else if (!this.isPast && !this.open) {
         this.animate("shake");
@@ -78,41 +85,23 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style scoped>
 .door {
-  position: relative;
-  background-color: #0432ff;
+  background-color: var(--color8);
   border: 5px solid #fff;
   font-size: 70px;
   display: block;
+  text-align: right;
   cursor: url("~static/images/christmas-star-filled.png"), auto;
 }
 .door:nth-child(2n) {
   border: 5px dotted black;
 }
 .door .door-number {
-  position: absolute;
-  right: 10px;
-  top: 0px;
   font-size: 70px;
 }
 .door.open .door-number {
   display: none;
-}
-.door a {
-  display: block;
-  height: 80px;
-}
-.door img {
-  width: 100%;
-  height: 80px;
-  object-fit: cover;
-  object-position: 50% 50%;
-}
-.door div {
-  text-align: center;
-  vertical-align: middle;
-  line-height: 80px;
 }
 .door-1 {
   grid-column: 1;
@@ -226,7 +215,8 @@ export default {
 }
 .door.open {
   cursor: default;
-  background-color: #ee23ee;
+  background-color: var(--color3);
   font-size: 16px;
+  transform: none;
 }
 </style>

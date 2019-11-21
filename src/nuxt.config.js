@@ -59,6 +59,6 @@ export default {
     extend(config, ctx) {}
   },
   env: {
-    overwriteDate: ""
+    overwriteDate: "2019/12/04"
   }
 };
