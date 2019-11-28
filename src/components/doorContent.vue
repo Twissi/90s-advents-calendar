@@ -1,18 +1,23 @@
 <template>
   <div style="width: 100%; height: 100%">
-    <div :ref="ref" class="contentwrapper" style="width: 100%; height: 100%">
-      <div
-        class="content"
-        @click="resize"
-        :style="{ backgroundImage: `url(${imageUrl})` }"
-      >
-        <a :href="url" target="_blank">Open Link</a>
+    <div :ref="ref" class="contentwrapper">
+      <div class="content" @click="resize">
+        <div
+          v-if="isImage"
+          class="imagecontent"
+          :style="{ backgroundImage: `url(${previewUrl})` }"
+        ></div>
+        <video v-if="isVideo" autoplay="false"><source :src="url" /></video>
+        <div class="info">
+          <a :href="url" target="_blank">Open in new window</a><br /><br />
+          <span class="credits">credits: {{ credits }}</span>
+        </div>
       </div>
     </div>
     <div
       @click="enlarge"
       class="preview"
-      :style="{ backgroundImage: `url(${imageUrl})` }"
+      :style="{ backgroundImage: `url(${previewUrl})` }"
     ></div>
   </div>
 </template>
@@ -24,9 +29,11 @@ import uuid from "uuid/v1";
 export default {
   name: "doorContent",
   props: {
-    imageUrl: String,
+    previewUrl: String,
     url: String,
-    id: Number
+    id: Number,
+    credits: String,
+    type: String
   },
   data: function() {
     return {
@@ -54,6 +61,13 @@ export default {
           duration: 1000
         });
       }
+    },
+    isImage: function() {
+      console.log(this.type);
+      return this.type === "image";
+    },
+    isVideo: function() {
+      return this.type === "video";
     }
   }
 };
@@ -73,6 +87,8 @@ export default {
   position: absolute;
   right: calc(-100vw);
   bottom: calc(-100vw);
+  width: 100%;
+  height: 100%;
 }
 .contentwrapper:after {
   display: block;
@@ -112,14 +128,26 @@ export default {
   left: 15%;
   margin: 0 auto;
   z-index: 100;
+  border: 5px solid whitesmoke;
+}
+.imagecontent {
+  width: 100%;
+  height: 100%;
   background-size: contain;
   background-color: var(--color3);
-  border: 5px solid whitesmoke;
   background-repeat: no-repeat;
   background-position: center center;
 }
+.info {
+  position: absolute;
+  text-align: center;
+  color: black;
+  bottom: -70px;
+  width: 100%;
+  text-align: center;
+}
 a {
-  color: whitesmoke;
+  color: black;
   font-size: 20px;
 }
 </style>

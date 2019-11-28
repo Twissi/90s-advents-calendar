@@ -1,11 +1,12 @@
 <template>
   <div class="calendar">
+    <span class="poem">{{ poem }}</span>
     <div class="doors">
       <template v-for="door in doors">
         <door :key="door.id" :content-id="door.id" />
       </template>
     </div>
-    <div class="title">{{title}}</div>
+    <div class="title">{{ title }}</div>
     <santa />
   </div>
 </template>
@@ -70,6 +71,12 @@ export default {
   grid-template-rows: repeat(5, 1fr);
 }
 
+.poem {
+  font-size: 90px;
+  opacity: 0.2;
+  overflow: hidden;
+}
+
 .title {
   position: absolute;
   top: 30px;
@@ -87,11 +94,5 @@ p {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-
-@media screen and (max-width: 1000px) {
-  .calendar {
-    /* transform: scale(0.8); */
-  }
 }
 </style>
